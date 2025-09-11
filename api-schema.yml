@@ -1,0 +1,243 @@
+openapi: 3.0.0
+info:
+  title: 資料整合 API
+  version: 1.0.0
+  description: 提供專案相關資料查詢與整合服務
+
+servers:
+  - url: https://api.example.com/v1
+    description: 正式環境
+  - url: https://api-test.example.com/v1
+    description: 測試環境
+
+security:
+  - ApiKeyAuth: []
+
+tags:
+  - name: Projects
+    description: 專案相關操作
+
+paths:
+  /projects:
+    get:
+      summary: 取得所有專案列表
+      tags:
+        - Projects
+      responses:
+        "200":
+          description: 成功回應
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectsResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+
+  /projects/{projectId}:
+    get:
+      summary: 取得特定專案資料
+      tags:
+        - Projects
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+          description: 專案識別碼
+          example: PROJ001
+      responses:
+        "200":
+          description: 成功回應
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /projects/{projectId}/devices:
+    get:
+      summary: 取得專案設備列表
+      tags:
+        - Projects
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+          description: 專案識別碼
+          example: PROJ001
+      responses:
+        "200":
+          description: 成功回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  msg:
+                    type: string
+                    example: ""
+                  projectId:
+                    type: string
+                    example: PROJ001
+                  projectName:
+                    type: string
+                    example: 南港辦公大樓
+                  devices:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Device"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    ProjectsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        msg:
+          type: string
+          example: ""
+        companyId:
+          type: string
+          example: COMP001
+        companyName:
+          type: string
+          example: 台灣電力公司
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+        timestamp:
+          type: string
+          example: "2025-01-09 10:30:15"
+
+    Project:
+      type: object
+      properties:
+        projectId:
+          type: string
+          example: PROJ001
+        projectName:
+          type: string
+          example: 南港辦公大樓
+        presenceCount:
+          type: integer
+          example: 156
+        devices:
+          type: array
+          items:
+            $ref: "#/components/schemas/Device"
+
+    ProjectDetail:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        msg:
+          type: string
+          example: ""
+        projectId:
+          type: string
+          example: PROJ001
+        projectName:
+          type: string
+          example: 南港辦公大樓
+        presenceCount:
+          type: integer
+          example: 156
+        devices:
+          type: array
+          items:
+            $ref: "#/components/schemas/Device"
+
+    Device:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          example: DEV001
+        deviceName:
+          type: string
+          example: 1F大門-入口
+        deviceLocation:
+          type: string
+          example: 1樓大廳
+        inCount:
+          type: integer
+          example: 523
+        outCount:
+          type: integer
+          example: 412
+        lastUpdateTime:
+          type: string
+          example: "2025-01-09 10:30:00"
+
+  responses:
+    Unauthorized:
+      description: 未提供 API Key
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 401
+              error:
+                type: string
+                example: API key required
+
+    Forbidden:
+      description: API Key 無效
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 403
+              error:
+                type: string
+                example: Invalid API key
+
+    NotFound:
+      description: 找不到資源
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 404
+              error:
+                type: string
+                example: Project not found
