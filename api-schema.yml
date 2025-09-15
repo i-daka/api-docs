@@ -149,6 +149,15 @@ components:
         presenceCount:
           type: integer
           example: 156
+          description: 即時在場人數
+        dailyEntryCount:
+          type: integer
+          example: 523
+          description: 當日進場人次
+        dailyExitCount:
+          type: integer
+          example: 412
+          description: 當日出場人次
         devices:
           type: array
           items:
@@ -172,6 +181,15 @@ components:
         presenceCount:
           type: integer
           example: 156
+          description: 即時在場人數
+        dailyEntryCount:
+          type: integer
+          example: 523
+          description: 當日進場人次
+        dailyExitCount:
+          type: integer
+          example: 412
+          description: 當日出場人次
         devices:
           type: array
           items:
