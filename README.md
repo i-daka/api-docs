@@ -1,4 +1,4 @@
-# 資料整合 API 文檔
+# 資料整合 API 文件
 
 歡迎使用資料整合 API！本 API 提供專案相關資料查詢與整合服務，讓您能夠輕鬆存取專案資訊、設備數據等功能。
 
@@ -21,9 +21,9 @@ curl -X GET "https://api.example.com/v1/projects" \
   -H "X-API-Key: your_api_key_here"
 ```
 
-詳細的認證說明請參考 [認證機制文檔](docs/getting-started/authentication.md)
+詳細的認證說明請參考 [認證機制文件](docs/getting-started/authentication.md)
 
-## 文檔導覽
+## 文件導覽
 
 ### 入門指南
 
@@ -35,7 +35,7 @@ curl -X GET "https://api.example.com/v1/projects" \
 
 ### API 參考
 
-- [OpenAPI 規範](api-schema.yml) - 完整的 API 規範文檔
+- [OpenAPI 規範](api-schema.yml) - 完整的 API 規範文件
 
 ## 主要功能
 
@@ -55,7 +55,7 @@ curl -X GET "https://api.example.com/v1/projects" \
 
 如有任何問題或需要協助，請聯繫：
 
-- 技術文檔：請參考本文檔的各個章節
+- 技術文件：請參考本文件的各個章節
 - 問題回報：請聯繫 iDaka 技術窗口
 
 ## 版本資訊

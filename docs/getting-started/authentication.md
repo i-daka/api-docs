@@ -75,7 +75,7 @@ axios.get("https://api.example.com/v1/projects", {
 在開始使用 API 之前,您需要先建立 API 金鑰:
 
 1. 登入 [智能助理平台](https://web.i-daka.com)
-2. 導航至「使用者」→「API 金鑰管理」
+2. 前往至「使用者」→「API 金鑰管理」
 3. 點擊「新增金鑰」按鈕
 4. 填寫金鑰資訊並選擇專案範圍
 5. 建立後立即複製並妥善保存金鑰
